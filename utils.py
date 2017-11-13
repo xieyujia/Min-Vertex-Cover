@@ -14,13 +14,15 @@ def read_graph( filename):
     with open(filename, 'r') as graph:
         num_data = graph.readline().split(' ')
         num_node,num_edge = int(num_data[0]),int(num_data[1]) #not used
-
+        i=0
         for line in graph:
-            lines.append(line[:-2])
+            i=i+1
+            lines.append(str(i)+' '+line[:-2])
 
-    G = nx.parse_adjlist(lines, nodetype = int)
-    #print(G.nodes())
-    #print(G.edges())
+    G = nx.parse_adjlist(lines[:-1], nodetype = int)
+#    print(lines)
+#    print(G.nodes())
+#    print(G.edges())
     return G
 
 def write_vc(output_file, quality, vc):
@@ -39,9 +41,10 @@ def write_trace(output_file, sol_trace):
         output.write(line+'\n')
 
 
-##if you want to test
-#graph_file = 'data/karate.graph'
-#G = read_graph(graph_file)
+#if you want to test
+graph_file = 'data/karate.graph'
+G = read_graph(graph_file)
+print(G.neighbors(1))
 #
 #quality = 10
 #vc = [0,1,2]
