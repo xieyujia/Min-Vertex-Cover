@@ -14,16 +14,19 @@ import os
 from utils import *
 #import networkx as nx
 #derive a vertex cover by greedy algorithm
-def approx_vc(OG): #OG is  nx.graph
-    G = OG.copy()
+def approx_vc(G): #G is  nx.graph
+    #G = OG.copy()
+    degree_list = G.degree()
     VC = list() #vertex cover set
-    max_node = max(list(G), key = lambda x: G.degree(x))
-    max_degree = G.degree(max_node)
-    while max_degree > 0:
+    max_node = max(degree_list , key = degree_list.get)
+    #max_degree = degree_list[max_node]
+    while degree_list[max_node] > 0:
+        degree_list[max_node] = 0
         VC.append(max_node)
-        G.remove_node(max_node)
-        max_node = max(list(G), key = lambda x: G.degree(x))
-        max_degree = G.degree(max_node)
+        #G.remove_node(max_node)
+        for node in G.neighbors(max_node):
+            degree_list[node] =  degree_list[node] - 1
+        max_node = max(degree_list , key = degree_list.get)
     return VC
 
 file_name_list = ['as-22july06', 'delaunay_n10', 'email', 'football', 'jazz', 
