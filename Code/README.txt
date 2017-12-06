@@ -16,3 +16,5 @@ This means apply algorithm LS1 to the graph 'email', set cutoff time to be 60s, 
 PATH_TO_GRAPHFILE is the path to the data file.
 
 ALGORITHM_NAME can be "BnB", "Approx", "LS1", "LS2".
+
+4. If you need help, type 'python main.py -h' to see usage instruction.
