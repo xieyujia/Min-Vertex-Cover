@@ -15,7 +15,7 @@ def main():
     
    parser = argparse.ArgumentParser()
    parser.add_argument('-inst', type = str, dest = 'path_of_graph', help = 'please use / as separator', required=True)
-   parser.add_argument('-alg', type = str, dest = 'name_of_alg', help = 'LS1', required=True)
+   parser.add_argument('-alg', type = str, dest = 'name_of_alg', help = 'LS1|LS2|Approx|BnB', required=True)
    parser.add_argument('-time', type = int, dest = 'cutoff_time', required=True)
    parser.add_argument('-seed', type = float, dest = 'randomseed', required=True)
    args = parser.parse_args()
@@ -37,7 +37,8 @@ def main():
       run = RunLS2()
       run.main(cutoff_time,10,randomseed)
    elif name_of_algorithm == 'Approx':
-      pass
+      G = read_graph(graphFiles)
+      approx_main(fileNames, G)
    else:
       print("No such method!")
 
