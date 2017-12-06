@@ -12,6 +12,7 @@
 """
 import os
 from utils import *
+import time
 #import networkx as nx
 #derive a vertex cover by greedy algorithm
 def approx_vc(G): #G is  nx.graph
@@ -29,17 +30,13 @@ def approx_vc(G): #G is  nx.graph
         max_node = max(degree_list , key = degree_list.get)
     return VC
 
-file_name_list = ['as-22july06', 'delaunay_n10', 'email', 'football', 'jazz', 
-                    'karate', 'hep-th', 'netscience', 'power', 'star', 'star2']
-
-file_dir = os.path.dirname(os.path.realpath(__file__))
-
-def approx_main(file_list):
-    #output_data = []
-    for file_name in file_list:
-        graph_file = file_dir + '\data\\'+file_name+'.graph'
-        output_file = file_dir + '\output\\'+file_name+ '_Approx.sol'
-        G = read_graph('data/'+file_name+'.graph')
-        VC = approx_vc(G)
-        write_vc(output_file, len(VC), VC)
-        
+def approx_main(file_name):
+    output_file = './' +file_name+ '_Approx.sol'
+    trace_output = './' +file_name+ '_Approx.trace'
+    G = read_graph('data/'+file_name+'.graph')
+    start_time = time.time()
+    VC = approx_vc(G)
+    used_time = time.time() - start_time
+    trace = [[round(used_time,2), len(VC)]] 
+    write_vc(output_file, len(VC), VC)
+    write_trace(trace_output, trace)    
