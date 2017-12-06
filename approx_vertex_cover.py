@@ -30,10 +30,9 @@ def approx_vc(G): #G is  nx.graph
         max_node = max(degree_list , key = degree_list.get)
     return VC
 
-def approx_main(file_name):
+def approx_main(file_name, G):
     output_file = './' +file_name+ '_Approx.sol'
     trace_output = './' +file_name+ '_Approx.trace'
-    G = read_graph('data/'+file_name+'.graph')
     start_time = time.time()
     VC = approx_vc(G)
     used_time = time.time() - start_time
