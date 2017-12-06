@@ -1,4 +1,4 @@
-The excutable: LocalSearch.py contains two Local Search Algorithms: LS1,LS2; please use LS1 in this contest.
+The excutable: main.py
 
 How to run this executable:
 
