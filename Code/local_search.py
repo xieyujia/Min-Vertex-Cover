@@ -116,7 +116,7 @@ class RunLS1:
 
     # Local Search Algorithm 1 The framework is based on Shaowei Cai's paper: "Balance between Complexity and Quality:
     # Local Search for Minimum Vertex Cover in Massive Graphs".
-    def MVCLS1(self,cutoff,sample_num,seed):
+    def MVCLS1(self,cutoff,sample_num,seed, graphFiles, fileNames):
         random.seed(seed)
         for i, graph in enumerate(graphFiles):
             G = self.read_graph(graph)
@@ -127,8 +127,8 @@ class RunLS1:
 
         nx.set_node_attributes(G,'gainfunction',0)
 
-        output_file_1 = open('.\\Solutions\\' + fileNames[0] + '_LS1_' + str(cutoff) + '_' + str(seed)+'.sol', 'w')
-        output_file_2 = open('.\\Solutions\\' + fileNames[0] + '_LS1_' + str(cutoff) + '_' + str(seed)+'.trace', 'w')
+        output_file_1 = open('.\\' + fileNames[0] + '_LS1_' + str(cutoff) + '_' + str(seed)+'.sol', 'w')
+        output_file_2 = open('.\\' + fileNames[0] + '_LS1_' + str(cutoff) + '_' + str(seed)+'.trace', 'w')
         sol_trace = []
 
         list_of_uncovered_edges=[]
@@ -205,8 +205,8 @@ class RunLS1:
 
     # main( cutoff, sample_num, randomseed).
     # Here sample_num is a parameter of our algorithm. It can be set to any fixed positive integer. Here we set it to be 6.
-    def main(self,cutoff,sample_num,seed):
-        self.MVCLS1(cutoff,sample_num,seed)
+    def main(self,cutoff,sample_num,seed, graphFiles, fileNames):
+        self.MVCLS1(cutoff,sample_num,seed, graphFiles, fileNames)
 
 class RunLS2:
 
@@ -300,7 +300,7 @@ class RunLS2:
        return tag
 
     # Local Search Algorithm 2, based on the idea of converting MVC to MIS (maximum independent set problem)
-    def MVCLS2(self,cutoff,sample_num,seed):
+    def MVCLS2(self,cutoff,sample_num,seed,graphFiles,fileNames):
         random.seed(seed)
         for i, graph in enumerate(graphFiles):
             G = self.read_graph(graph)
@@ -328,8 +328,8 @@ class RunLS2:
             if G.node[i]['tagfree'] == 1:
                 freevertexset.append(i)
 
-        output_file_1 = open('.\\Solutions\\' + fileNames[0] + '_LS2_' + str(cutoff) + '_' + str(seed)+'.sol', 'w')
-        output_file_2 = open('.\\Solutions\\' + fileNames[0] + '_LS2_' + str(cutoff) + '_' + str(seed)+'.trace','w')
+        output_file_1 = open('.\\' + fileNames[0] + '_LS2_' + str(cutoff) + '_' + str(seed)+'.sol', 'w')
+        output_file_2 = open('.\\' + fileNames[0] + '_LS2_' + str(cutoff) + '_' + str(seed)+'.trace','w')
         sol_trace = []
 
         begintime=time.time()
@@ -401,9 +401,9 @@ class RunLS2:
         self.write_vc(output_file_1, quality, Cstar)
         self.write_trace(output_file_2, sol_trace)
 
-    def main(self,cutoff,sample_num,seed):
+    def main(self,cutoff,sample_num,seed,graphFiles,fileNames):
         run = RunLS2()
-        run.MVCLS2(cutoff,sample_num,seed)
+        run.MVCLS2(cutoff,sample_num,seed,graphFiles,fileNames)
 
 if __name__ == '__main__':# run LS1 or LS2
 
